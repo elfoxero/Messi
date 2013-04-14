@@ -115,6 +115,7 @@ Messi.prototype = {
     callback: null,                          // callback function after close message
     center: true,                            // center message on screen
     closeButton: true,                       // show close button in header title (or content if buttons array is empty).
+    fixed: false,                            // fixes message on screen
     height: 'auto',                          // content height
     title: null,                             // message title
     titleClass: null,                        // title style: info, warning, success, error
@@ -156,6 +157,8 @@ Messi.prototype = {
     
     this.messi.css({top: this.options.viewport.top, left: this.options.viewport.left, 'z-index': this.options.zIndex + jQuery('.messi').length}).show().animate({opacity: 1}, 300);
     
+    if(this.options.fixed) this.messi.css({position: 'fixed'});
+
     // cancelamos el scroll
     //document.documentElement.style.overflow = "hidden";
     
