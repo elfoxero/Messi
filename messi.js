@@ -183,24 +183,6 @@ Messi.prototype = {
     
     if(this.options.fixed || this.options.dock != null) this.messi.css({position: 'fixed'});
 
-    if(this.options.dock != null) {
-      if(this.options.dock.length == 1) {
-        switch(this.options.dock) {
-          case 'T':
-            this.messi
-            break;
-          case 'B':
-            break;
-          case 'L':
-            break;
-          case 'R':
-            break;
-        }
-      } else if(this.options.dock.length == 2) {
-
-      }
-    }
-
     // cancelamos el scroll
     //document.documentElement.style.overflow = "hidden";
     
