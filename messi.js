@@ -115,6 +115,7 @@ Messi.prototype = {
     callback: null,                          // callback function after close message
     center: true,                            // center message on screen
     closeButton: true,                       // show close button in header title (or content if buttons array is empty).
+    dock: null,                              // dock message on screen ('T', 'L', 'B', 'R', 'TL', 'TR', etc)
     fixed: false,                            // fixes message on screen
     height: 'auto',                          // content height
     title: null,                             // message title
@@ -153,11 +154,52 @@ Messi.prototype = {
     this.messi.appendTo(document.body);
     
     // obtenemos el centro de la pantalla si la opción de centrar está activada
-    if(this.options.center) this.options.viewport = this.viewport(jQuery('.messi-box', this.messi));
+    
+    if(this.options.dock != null) {
+      this.options.viewport = {top: '50%', left: '50%'};
+
+      if(this.options.dock.indexOf('T') > -1) {
+        this.options.viewport.top = '0%';
+        this.messi.css({'margin-top': '20px'});
+      } else if(this.options.dock.indexOf('B') > -1) {
+        this.options.viewport.top = '100%';
+        this.messi.css({'margin-top': '-' + (this.messi.height() + 20) + 'px'})
+      } else {
+        this.messi.css({'margin-top': (- this.messi.height() / 2) + 'px'});
+      }
+
+      if(this.options.dock.indexOf('L') > -1) {
+        this.options.viewport.left = '0%';
+        this.messi.css({'margin-left': '20px'});
+      } else if(this.options.dock.indexOf('R') > -1) {
+        this.options.viewport.left = '100%';
+        this.messi.css({'margin-left': '-' + (this.messi.width() + 20) + 'px'})
+      } else {
+        this.messi.css({'margin-left': (- this.messi.width() / 2) + 'px'});
+      }
+    } else if(this.options.center) this.options.viewport = this.viewport(jQuery('.messi-box', this.messi));
     
     this.messi.css({top: this.options.viewport.top, left: this.options.viewport.left, 'z-index': this.options.zIndex + jQuery('.messi').length}).show().animate({opacity: 1}, 300);
     
-    if(this.options.fixed) this.messi.css({position: 'fixed'});
+    if(this.options.fixed || this.options.dock != null) this.messi.css({position: 'fixed'});
+
+    if(this.options.dock != null) {
+      if(this.options.dock.length == 1) {
+        switch(this.options.dock) {
+          case 'T':
+            this.messi
+            break;
+          case 'B':
+            break;
+          case 'L':
+            break;
+          case 'R':
+            break;
+        }
+      } else if(this.options.dock.length == 2) {
+
+      }
+    }
 
     // cancelamos el scroll
     //document.documentElement.style.overflow = "hidden";
